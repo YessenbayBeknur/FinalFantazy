@@ -2,7 +2,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -43,8 +42,6 @@ public class Game extends Application {
         primaryStage.setFullScreen(true);
 
         primaryStage.show();
-
-
 
     }
 }

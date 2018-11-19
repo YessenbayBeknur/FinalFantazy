@@ -1,6 +1,6 @@
-public class Axe extends HeroDecorator {
+public class Sword extends HeroDecorator {
     GameUnit p;
-    public Axe(GameUnit p) {
+    public Sword(GameUnit p) {
         this.p = p;
     }
 
@@ -9,7 +9,7 @@ public class Axe extends HeroDecorator {
         int chance = 1 + (int)(Math.random() + 10);
         if (chance == 1){return 0;}
         else if (chance == 2){return 180;}
-        else return 60 + p.damage();
+        else return 40 + p.damage();
     }
 
     @Override
@@ -37,3 +37,4 @@ public class Axe extends HeroDecorator {
         return p.magicDamage();
     }
 }
+
