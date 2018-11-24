@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
@@ -10,12 +11,25 @@ import javafx.stage.Stage;
 public class Game extends Application {
 
     public void start(Stage primaryStage) throws Exception {
+        Hero hero = new Hero();
+        hero = new Palochka(hero);
+        Monster monster = new Monster();
+        Invoker invoker = new Invoker();
+
+        AttackCommand attackCommand = new AttackCommand(hero, monster);
+        DefenceCommand defenceCommand = new DefenceCommand(hero);
+        MagicCommand magicCommand = new MagicCommand(hero, monster);
+        invoker.setCommand(0, attackCommand);
+        invoker.setCommand(1, defenceCommand);
+        invoker.setCommand(2, magicCommand);
+
+
         BorderPane borderPane = new BorderPane();
         BorderPane action_scene = new BorderPane();
         borderPane.setCenter(action_scene);
 
         action_scene.setStyle("-fx-background-image:url('game_back.png');" +
-                            "-fx-background-size: cover;");
+                "-fx-background-size: cover;");
 
 
         VBox vBox1 = new VBox(5);
@@ -26,9 +40,12 @@ public class Game extends Application {
         vBox1.getChildren().addAll(attack, defence, magic, item);
 
         ProgressBar healthBar = new ProgressBar();
+        ProgressBar monsterHealthBar = new ProgressBar();
+        monsterHealthBar.setStyle("-fx-accent: red;");
+        monsterHealthBar.setProgress(100);
         healthBar.setProgress(100);
         VBox vBox2 = new VBox();
-        vBox2.getChildren().addAll(healthBar);
+        vBox2.getChildren().addAll(healthBar,monsterHealthBar);
 
         HBox bar = new HBox();
         bar.setStyle("-fx-background-color: black;");
@@ -42,6 +59,41 @@ public class Game extends Application {
         primaryStage.setFullScreen(true);
 
         primaryStage.show();
+        Hero finalHero = hero;
+        attack.setOnAction(e -> {
+            invoker.ButtonWasPressed(0);
+            finalHero.setHealth(finalHero.getHealth() - monster.getDamage());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    healthBar.setProgress(finalHero.getHealth()/100);
+                    monsterHealthBar.setProgress(monster.getHealth()/100);
+                }
+            });
+        });
+        defence.setOnAction(e -> {
+            invoker.ButtonWasPressed(1);
+            if (!finalHero.isDefenced())
+                finalHero.setHealth(finalHero.getHealth()-monster.getDamage());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    healthBar.setProgress(finalHero.getHealth()/100);
+                    monsterHealthBar.setProgress(monster.getHealth()/100);
+                }
+            });
+        });
+        magic.setOnAction(e -> {
+            invoker.ButtonWasPressed(2);
+            finalHero.setHealth(finalHero.getHealth()-monster.getDamage());
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    healthBar.setProgress(finalHero.getHealth()/100);
+                    monsterHealthBar.setProgress(monster.getHealth()/100);
+                }
+            });
+        });
 
     }
 }

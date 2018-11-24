@@ -1,9 +1,13 @@
 public interface GameUnit {
-    public int damage();
-    public int health();
-    public void setHealth(int health);
-    public void setMana(int mana);
-    public int mana();
-    public int magicDamage();
-
+    double getHealth();
+    void setHealth(double health);
+    double getAttack();
+    void setAttack(double attack);
+    double getDamage();
+    double getDefence();
+    void setDefence(double defence);
+    double getCriticalChance();
+    void setCriticalChance(double chance);
+    void increaseCriticalChance(double chance);
+    void decreaseCriticalChance(double chance);
 }
