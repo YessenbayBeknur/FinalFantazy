@@ -1,14 +1,22 @@
 public class Palochka extends Hero {
-    Hero p;
+    private Hero hero;
 
-    Palochka(Hero p){
-        this.p = p;
+    public Palochka(Hero p){
+        this.hero = p;
     }
 
 
-    public double useMagic() { return this.p.useMagic() + 88;}
+    public double getDefence() {
+        return this.hero.getDefence();
+    }
 
+    public double getAttack(){
+        return this.hero.getAttack();
+    }
 
+    public double getMagicDamage() {
+        return this.hero.getMagicDamage() + 7;
+    }
 
 
 }

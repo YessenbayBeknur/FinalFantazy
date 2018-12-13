@@ -7,7 +7,11 @@ public interface GameUnit {
     double getDefence();
     void setDefence(double defence);
     double getCriticalChance();
-    void setCriticalChance(double chance);
-    void increaseCriticalChance(double chance);
-    void decreaseCriticalChance(double chance);
+    void setCriticalChance(int chance);
+    void setGotDamage(double d, boolean missed);
+    double getGotDamage();
+    boolean isCritical();
+    void cleanCritical();
+    boolean isMissed();
+    void cleanMiss();
 }
