@@ -33,6 +33,7 @@ public class Game extends Application {
         System.out.println(hero.getClass().toString());
 
 
+
         //classes
         Monster monster = factoryMonster.getNewMonster();
         linkClass = new LinkClass(hero, monster);
@@ -257,6 +258,7 @@ public class Game extends Application {
 
 
         primaryStage.setScene(scene);
+
 
         primaryStage.setFullScreen(true);
         primaryStage.show();

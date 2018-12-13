@@ -1,4 +1,3 @@
-package еуые;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -17,28 +16,26 @@ import javafx.stage.Stage;
 
 
 
-public class menu extends Application {
-    static int c = 0;
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        BorderPane pane = new BorderPane();
+public class menu extends BorderPane {
+    Label error = new Label("ERROR! at jaz nahy");
+    Button button = new Button("Start");
+    TextField nickname = new TextField();
 
+
+    public menu(){
         Label title = new Label("Final Fantasy europeyka");
         title.setFont(new Font("Arial",54));
         title.setTextFill(Color.web("#cccc00"));
 
-        TextField nickname = new TextField();
+
         Label label = new Label("Nickname", nickname);
         label.setContentDisplay(ContentDisplay.RIGHT);
 
-        Button button = new Button("Start");
         button.setAlignment(Pos.CENTER);
 
-        Image image = new Image(getClass().getResourceAsStream("1.gif"));     //!!!!!!
+        Image image = new Image(getClass().getResourceAsStream("images/hero2.gif"));     //!!!!!!
         ImageView gif = new ImageView();
         gif.setImage(image);
-        //gif.setFitWidth(70);
-        //gif.setFitHeight(80);
 
         Label hpValue = new Label("HP: 100");
         hpValue.setFont(new Font("Arial",35));
@@ -62,31 +59,25 @@ public class menu extends Application {
         vBox.setAlignment(Pos.CENTER);
 
 
-        button.setOnAction(e -> {
-            if(nickname.getText().contains("")){
-                Label error = new Label("ERROR! at jaz nahy");
-                error.setTextFill(Color.web("#ff0000"));
-                if(c == 0){
-                    c+=1;
-                    vBox.getChildren().add(error);
-                }
-            }
-            else{
-
-            }
-        });
+        error.setTextFill(Color.web("#ff0000"));
+        error.setVisible(false);
+        vBox.getChildren().add(error);
 
 
+        this.setCenter(vBox);
+        this.setBackground(new Background(new BackgroundFill(Color.web("#1a1a1a"), CornerRadii.EMPTY, Insets.EMPTY)));
 
+    }
 
-        pane.setCenter(vBox);
-        pane.setBackground(new Background(new BackgroundFill(Color.web("#1a1a1a"), CornerRadii.EMPTY, Insets.EMPTY)));
+    public Button getButton(){
+        return button;
+    }
 
+    public Label getError(){
+        return error;
+    }
 
-        Scene scene = new Scene(pane);
-        primaryStage.setScene(scene);
-        primaryStage.setFullScreen(true);
-        primaryStage.show();
-
+    public TextField getNickname(){
+        return nickname;
     }
 }
